@@ -63,7 +63,7 @@ router.post("/register", upload.single("profileImage"), async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .json({ message: "Registration failed!", error: err.message });
+      .json({ message: "Registration failed!", error: error.message });
   }
 });
 
