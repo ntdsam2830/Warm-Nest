@@ -19,6 +19,7 @@ const LoginPage = () => {
             type="password"
             placeholder="Password"
             required
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">LOGIN</button>
