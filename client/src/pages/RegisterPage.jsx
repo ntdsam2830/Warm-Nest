@@ -31,7 +31,7 @@ const RegisterPage = () => {
       formData.password === formData.confirmPassword ||
         formData.confirmPassword === ""
     );
-  });
+  }, [formData.password, formData.confirmPassword]);
 
   const navigate = useNavigate();
 
