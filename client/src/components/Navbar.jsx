@@ -4,6 +4,7 @@ import { Search, Person, Menu } from "@mui/icons-material";
 import variables from "../styles/variables.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "../styles/Navbar.scss";
 
 export const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -29,9 +30,13 @@ export const Navbar = () => {
       </div>
       <div className="navbar_right">
         {user ? (
-          <a href="/create-listing">Become A Host</a>
+          <a href="/create-listing" className="host">
+            Become A Host
+          </a>
         ) : (
-          <a href="/login">Become A Host</a>
+          <a href="/login" className="host">
+            Become A Host
+          </a>
         )}
 
         <button className="navbar_right_account">
