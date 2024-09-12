@@ -21,14 +21,12 @@ export const Navbar = () => {
       <a href="/">
         <img src="/assets/logo.png" alt="logo" />
       </a>
-
       <div className="navbar_search">
         <input type="text" placeholder="Search..." />
         <IconButton>
           <Search sx={{ color: variables.pinkred }} />
         </IconButton>
       </div>
-
       <div className="navbar_right">
         {user ? (
           <a href="/create-listing">Become A Host</a>
