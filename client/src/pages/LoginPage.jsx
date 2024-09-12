@@ -5,6 +5,25 @@ const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const respone = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      /* Get data after fetching */
+      const loggedIn = await respone.json();
+
+      
+    } catch (error) {}
+  };
+
   return (
     <div className="login">
       <div className="login_content">
