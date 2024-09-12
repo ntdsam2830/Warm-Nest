@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import "../styles/Login.scss";
+import { setLogin } from "../redux/state";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const respone = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,16 +25,26 @@ const LoginPage = () => {
       });
 
       /* Get data after fetching */
-      const loggedIn = await respone.json();
+      const loggedIn = await response.json();
 
-      
-    } catch (error) {}
+      if (loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("Login failed", error.message);
+    }
   };
 
   return (
     <div className="login">
       <div className="login_content">
-        <form className="login_content_form">
+        <form className="login_content_form" onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Email"
