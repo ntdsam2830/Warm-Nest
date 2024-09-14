@@ -5,6 +5,7 @@ import variables from "../styles/variables.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Navbar.scss";
+import { setLogout } from "../redux/state";
 
 export const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ export const Navbar = () => {
 
   const [search, setsearch] = useState("");
 
-  const [dropdownMenu, setdropdownMenu] = useState("");
+  const [dropdownMenu, setDropdownMenu] = useState("");
 
   return (
     <div className="navbar">
@@ -39,7 +40,10 @@ export const Navbar = () => {
           </a>
         )}
 
-        <button className="navbar_right_account">
+        <button
+          className="navbar_right_account"
+          onClick={() => setDropdownMenu(!dropdownMenu)}
+        >
           <Menu sx={{ color: variables.darkgrey }} />
           {!user ? (
             <Person sx={{ color: variables.darkgrey }} />
@@ -70,7 +74,14 @@ export const Navbar = () => {
             <Link to="/">Property List</Link>
             <Link to="/">Reservation List</Link>
             <Link to="/">Become A Host</Link>
-            <Link to="/login">Log Out</Link>
+            <Link
+              to="/login"
+              onClick={() => {
+                dispatch(setLogout());
+              }}
+            >
+              Log Out
+            </Link>
           </div>
         )}
       </div>
