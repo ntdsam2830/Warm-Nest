@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import { Search, Person, Menu } from "@mui/icons-material";
 import variables from "../styles/variables.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/Navbar.scss";
 
 export const Navbar = () => {
@@ -55,6 +55,24 @@ export const Navbar = () => {
             />
           )}
         </button>
+
+        {dropdownMenu && !user && (
+          <div className="navbar_right_accountmenu">
+            <Link to="/login">Login</Link>
+            <Link to="/register">Signup</Link>
+          </div>
+        )}
+
+        {dropdownMenu && user && (
+          <div className="navbar_right_accountmenu">
+            <Link to="/">Trip List</Link>
+            <Link to="/">Wish List</Link>
+            <Link to="/">Property List</Link>
+            <Link to="/">Reservation List</Link>
+            <Link to="/">Become A Host</Link>
+            <Link to="/login">Log Out</Link>
+          </div>
+        )}
       </div>
     </div>
   );
