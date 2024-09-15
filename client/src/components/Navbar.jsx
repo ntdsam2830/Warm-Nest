@@ -7,7 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../styles/Navbar.scss";
 import { setLogout } from "../redux/state";
 
-export const Navbar = () => {
+const Navbar = () => {
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -88,3 +88,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
+export default Navbar;
