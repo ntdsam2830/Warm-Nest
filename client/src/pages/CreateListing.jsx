@@ -48,6 +48,22 @@ const CreateListing = () => {
                 />
               </div>
             </div>
+
+            <div className="half">
+              <div className="location">
+                <p>Apartment, Suite, etc. (if applicable)</p>
+                <input
+                  type="text"
+                  placeholder="Apt, Suite, etc. (if applicable)"
+                  name="aptSuite"
+                  required
+                />
+              </div>
+              <div className="location">
+                <p>City</p>
+                <input type="text" placeholder="City" name="city" required />
+              </div>
+            </div>
           </div>
         </form>
       </div>
