@@ -32,6 +32,7 @@ const CreateListing = () => {
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
                   </div>
+                  <div className="type_icon">{item.icon}</div>
                 </div>
               ))}
             </div>
@@ -62,6 +63,27 @@ const CreateListing = () => {
               <div className="location">
                 <p>City</p>
                 <input type="text" placeholder="City" name="city" required />
+              </div>
+            </div>
+
+            <div className="half">
+              <div className="location">
+                <p>Province</p>
+                <input
+                  type="text"
+                  placeholder="Province"
+                  name="province"
+                  required
+                />
+              </div>
+              <div className="location">
+                <p>Country</p>
+                <input
+                  type="text"
+                  placeholder="Country"
+                  name="country"
+                  required
+                />
               </div>
             </div>
           </div>
