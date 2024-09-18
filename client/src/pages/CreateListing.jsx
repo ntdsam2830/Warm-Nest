@@ -268,6 +268,7 @@ const CreateListing = () => {
                                     />
                                     <button
                                       type="button"
+                                      className="trash"
                                       onClick={() => handleRemovePhotos(index)}
                                       style={{ hover: variables.red }}
                                     >
