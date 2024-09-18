@@ -1,7 +1,9 @@
 import "../styles/CreateListing.scss";
 import React from "react";
 import Navbar from "../components/Navbar";
-import { categories, types } from "../data";
+import { categories, types, facilities } from "../data";
+import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
+import variables from "../styles/variables.scss";
 
 const CreateListing = () => {
   return (
@@ -27,7 +29,7 @@ const CreateListing = () => {
             <h3>What type of place will guests have?</h3>
             <div className="type-list">
               {types?.map((item, index) => (
-                <div className="type">
+                <div className="type" key={index}>
                   <div className="type_text">
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -85,6 +87,113 @@ const CreateListing = () => {
                   required
                 />
               </div>
+            </div>
+
+            <h3>Share some basics about your place</h3>
+            <div className="basics">
+              <div className="basic">
+                <p>Guests</p>
+                <div className="basic_count">
+                  <RemoveCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                  <p>1</p>
+                  <AddCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="basic">
+                <p>Bedrooms</p>
+                <div className="basic_count">
+                  <RemoveCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                  <p>1</p>
+                  <AddCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="basic">
+                <p>Beds</p>
+                <div className="basic_count">
+                  <RemoveCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                  <p>1</p>
+                  <AddCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="basic">
+                <p>Bathrooms</p>
+                <div className="basic_count">
+                  <RemoveCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                  <p>1</p>
+                  <AddCircleOutline
+                    sx={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      "&:hover": { color: variables.pinkred },
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="create-listing_step2">
+              <h2>Step 2: Make your place stand out</h2>
+              <hr />
+
+              <h3>Tell guests what your place has to offer</h3>
+              <div className="amenities">
+                {facilities?.map((item, index) => (
+                  <div className="facility" key={index}>
+                    <div className="facility_icon">{item.icon}</div>
+                    <p>{item.name}</p>
+                  </div>
+                ))}
+              </div>
+
+              <h3>Add some photos of your place</h3>
+              <hr />
+
+              <h3></h3>
             </div>
           </div>
         </form>
