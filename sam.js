@@ -38,17 +38,15 @@
 // const chosenArr = givenFruit.slice(0, 4);
 // console.log(chosenArr);
 
-// const studentAs = [
-//   { name: "Alice", age: 15 },
-//   { name: "Bob", age: 16 },
-//   { name: "Lucy", age: 20 },
-//   { name: "Harry", age: 19 },
-//   { name: "Kate", age: 17 },
-//   { name: "John", age: 16 },
-//   { name: "Alice", age: 17 },
-//   { name: "Sam", age: 19 },
-//   { name: "Lily", age: 18 },
-// ];
+const studentAs = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 16 },
+  { name: "John", age: 16 },
+  { name: "Alice", age: 16 },
+  { name: "Sam", age: 19 },
+  { name: "Lily", age: 18 },
+  { name: "John", age: 19 },
+];
 
 // const myArr = studentAs.splice(1, 2, { name: "Amy", age: 21 });
 // console.log(myArr);
@@ -83,7 +81,18 @@
 //   return acc;
 // }, []);
 
-// console.log(uniqueStudents);
+const seenNames = new Set("Alice", "Bob", "John", "Sam", "Lily");
+const uniqueStudents = studentAs.filter((student) => {
+  if (seenNames.has(student.name)) {
+    return false; // Duplicate, skip this student
+  } else {
+    seenNames.add(student.name); // Add the name to the set
+    return true; // First occurrence, keep this student
+  }
+});
+
+console.log(seenNames);
+console.log(uniqueStudents);
 
 // const studentBs = [
 //   { name: "Alice", age: 17 },
@@ -111,4 +120,3 @@ const obj3 = { hobby: "Reading", country: "USA" };
 const mergedObj = { ...obj1, ...obj2, ...obj3 };
 
 console.log(mergedObj);
-
