@@ -50,6 +50,8 @@ const CreateListing = () => {
     }
   };
 
+  console.log(amenities);
+
   /* UPLOAD, DRAG & DROP, REMOVE PHOTOS */
   const [photos, setPhotos] = useState([]);
 
