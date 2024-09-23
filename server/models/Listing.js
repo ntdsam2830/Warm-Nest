@@ -80,3 +80,4 @@ const ListingScheme = new mongoose.Schema(
 );
 
 const Listing = mongoose.model("Listing", ListingScheme);
+module.exports = Listing;
