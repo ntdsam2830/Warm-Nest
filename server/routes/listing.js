@@ -3,6 +3,7 @@ const multer = require("multer");
 
 const Listing = require("../models/Listing");
 const User = require("../models/User");
+const { json } = require("body-parser");
 
 /* Configuration Multer for File Upload */
 const storage = multer.diskStorage({
@@ -21,7 +22,7 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
   try {
     /* Take the in4 from the forms*/
     const {
-      userId,
+      creator,
       category,
       type,
       streetAddress,
@@ -32,15 +33,13 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
       bedroomCount,
       bedCount,
       bathroomCount,
-      amentities,
+      amenities,
       title,
       description,
       highlight,
       highlightDesc,
       price,
     } = req.body;
-
-    const user = await User.findById(userId);
 
     const listingPhotos = req.files;
 
@@ -51,8 +50,35 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
     const listingPhotoPaths = listingPhotos.map((file) => file.path);
 
     const newListing = new Listing({
-      userId,
-      firstName: user.firstName,
+      creator,
+      category,
+      type,
+      streetAddress,
+      aptSuite,
+      city,
+      province,
+      country,
+      bedroomCount,
+      bedCount,
+      bathroomCount,
+      amenities,
+      listingPhotoPaths,
+      title,
+      description,
+      highlight,
+      highlightDesc,
+      price,
     });
-  } catch (error) {}
+
+    await newListing.save();
+
+    res.status(200), json(newListing);
+  } catch (error) {
+    res
+      .status(409)
+      .json({ message: "Fail to create Listing", error: error.message });
+    console.log(error);
+  }
 });
+
+/* GET LISTINGS */
