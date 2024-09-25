@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ListingScheme = new mongoose.Schema(
   {
     creator: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     category: {

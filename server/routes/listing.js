@@ -91,11 +91,17 @@ router.get("/", async (req, res) => {
       listings = await Listing.find({ category: qCategory }).populate(
         "creator"
       );
-    } else{
-        listings = await Listing.find()
+    } else {
+      listings = await Listing.find();
     }
 
+    res.status(200).json(listings);
+  } catch (error) {
     res
-    
-  } catch (error) {}
+      .status(404)
+      .json({ message: "Fail to fetch listings", error: error.message });
+    console.log(error);
+  }
 });
+
+module.exports = router;
