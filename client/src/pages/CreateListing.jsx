@@ -120,6 +120,21 @@ const CreateListing = () => {
       listingForm.append("highlight", formDescription.highlight);
       listingForm.append("highlightDesc", formDescription.highlightDesc);
       listingForm.append("price", formDescription.price);
+
+      /* Append each selected photos to the FormData object */
+      photos.forEach((photo) => {
+        listingForm.append("listingPhotos", photo);
+      });
+
+      /* Send a POST request to server */
+      const response = await fetch("http://localhost:3001/properties/create", {
+        method: "POST",
+        body: listingForm,
+      });
+      
+      if(response.ok){
+        navigate("/");
+      }
     } catch (error) {
       console.log("Publish Listing failed", error.message);
     }
@@ -505,6 +520,7 @@ const CreateListing = () => {
               </div>
             </div>
           </div>
+          
           <button className="submit_btn" type="submit">
             CREATE YOUR LISTING
           </button>
