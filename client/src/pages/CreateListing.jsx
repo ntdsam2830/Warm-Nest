@@ -131,8 +131,8 @@ const CreateListing = () => {
         method: "POST",
         body: listingForm,
       });
-      
-      if(response.ok){
+
+      if (response.ok) {
         navigate("/");
       }
     } catch (error) {
@@ -146,7 +146,7 @@ const CreateListing = () => {
 
       <div className="create-listing">
         <h1>Publish Your Place</h1>
-        <form>
+        <form onSubmit={handlePost}>
           <div className="create-listing_step1">
             <h2> Step 1: Tell us about your place</h2>
             <hr />
@@ -358,172 +358,174 @@ const CreateListing = () => {
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="create-listing_step2">
-              <h2>Step 2: Make your place stand out</h2>
-              <hr />
+          <div className="create-listing_step2">
+            <h2>Step 2: Make your place stand out</h2>
+            <hr />
 
-              <h3>Tell guests what your place has to offer</h3>
-              <div className="amenities">
-                {facilities?.map((item, index) => (
+            <h3>Tell guests what your place has to offer</h3>
+            <div className="amenities">
+              {facilities?.map((item, index) => (
+                <div
+                  className={`facility ${
+                    amenities.includes(item.name) ? "selected" : ""
+                  }`}
+                  key={index}
+                  onClick={() => handleSelectAmenities(item.name)}
+                >
+                  <div className="facility_icon">{item.icon}</div>
+                  <p>{item.name}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3>Add some photos of your place</h3>
+            <hr />
+            <DragDropContext onDragEnd={handleDragPhotos}>
+              <Droppable droppableId="photos" direction="horizontal">
+                {(provided) => (
                   <div
-                    className={`facility ${
-                      amenities.includes(item.name) ? "selected" : ""
-                    }`}
-                    key={index}
-                    onClick={() => handleSelectAmenities(item.name)}
+                    className="photos"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
                   >
-                    <div className="facility_icon">{item.icon}</div>
-                    <p>{item.name}</p>
-                  </div>
-                ))}
-              </div>
+                    {photos.length < 1 && (
+                      <>
+                        <input
+                          id="image"
+                          type="file"
+                          style={{ display: "none" }}
+                          accept="image/*"
+                          onChange={handleUploadPhotos}
+                          multiple
+                        />
+                        <label htmlFor="image" className="alone">
+                          <div className="icon">
+                            <IoIosImages />
+                          </div>
+                          <p>Upload from your device</p>
+                        </label>
+                      </>
+                    )}
 
-              <h3>Add some photos of your place</h3>
-              <hr />
-              <DragDropContext onDragEnd={handleDragPhotos}>
-                <Droppable droppableId="photos" direction="horizontal">
-                  {(provided) => (
-                    <div
-                      className="photos"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                      {photos.length < 1 && (
-                        <>
-                          <input
-                            id="image"
-                            type="file"
-                            style={{ display: "none" }}
-                            accept="image/*"
-                            onChange={handleUploadPhotos}
-                            multiple
-                          />
-                          <label htmlFor="image" className="alone">
-                            <div className="icon">
-                              <IoIosImages />
-                            </div>
-                            <p>Upload from your device</p>
-                          </label>
-                        </>
-                      )}
-
-                      {photos.length >= 1 && (
-                        <>
-                          {photos.map((photo, index) => {
-                            return (
-                              <Draggable
-                                key={index}
-                                draggableId={index.toString()}
-                                index={index}
-                              >
-                                {(provided) => (
-                                  <div
-                                    className="photo"
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
+                    {photos.length >= 1 && (
+                      <>
+                        {photos.map((photo, index) => {
+                          return (
+                            <Draggable
+                              key={index}
+                              draggableId={index.toString()}
+                              index={index}
+                            >
+                              {(provided) => (
+                                <div
+                                  className="photo"
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <img
+                                    src={URL.createObjectURL(photo)}
+                                    alt="place"
+                                  />
+                                  <button
+                                    type="button"
+                                    className="trash"
+                                    onClick={() => handleRemovePhotos(index)}
+                                    style={{ hover: variables.red }}
                                   >
-                                    <img
-                                      src={URL.createObjectURL(photo)}
-                                      alt="place"
+                                    <BiTrash
+                                      sx={{
+                                        "&:hover": {
+                                          color: variables.red,
+                                        },
+                                      }}
                                     />
-                                    <button
-                                      type="button"
-                                      className="trash"
-                                      onClick={() => handleRemovePhotos(index)}
-                                      style={{ hover: variables.red }}
-                                    >
-                                      <BiTrash
-                                        sx={{
-                                          "&:hover": {
-                                            color: variables.red,
-                                          },
-                                        }}
-                                      />
-                                    </button>
-                                  </div>
-                                )}
-                              </Draggable>
-                            );
-                          })}
-                          <input
-                            id="image"
-                            type="file"
-                            style={{ display: "none" }}
-                            accept="image/*"
-                            onChange={handleUploadPhotos}
-                            multiple
-                          />
-                          <label htmlFor="image" className="together">
-                            <div className="icon">
-                              <IoIosImages />
-                            </div>
-                            <p>Upload from your device</p>
-                          </label>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+                                  </button>
+                                </div>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        <input
+                          id="image"
+                          type="file"
+                          style={{ display: "none" }}
+                          accept="image/*"
+                          onChange={handleUploadPhotos}
+                          multiple
+                        />
+                        <label htmlFor="image" className="together">
+                          <div className="icon">
+                            <IoIosImages />
+                          </div>
+                          <p>Upload from your device</p>
+                        </label>
+                      </>
+                    )}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
 
-              <h3>What make your place attractive and exciting?</h3>
-              <div className="description">
-                <p>Title</p>
-                <input
-                  type="text"
-                  placeholder="Title"
-                  name="title"
-                  value={formDescription.title}
-                  onChange={handleChangeDescription}
-                  required
-                />
-                <p>Description</p>
-                <textarea
-                  type="text"
-                  placeholder="Description"
-                  name="description"
-                  value={formDescription.description}
-                  onChange={handleChangeDescription}
-                  required
-                />
-                <p>Highlight</p>
-                <input
-                  type="text"
-                  placeholder="Highlight"
-                  name="highlight"
-                  value={formDescription.highlight}
-                  onChange={handleChangeDescription}
-                  required
-                />
-                <p>Highlight details</p>
-                <textarea
-                  type="text"
-                  placeholder="Highlight details"
-                  name="highlightDesc"
-                  value={formDescription.highlightDesc}
-                  onChange={handleChangeDescription}
-                  required
-                />
-                <p>Now, set your PRICE</p>
-                <span>$</span>
-                <input
-                  type="number"
-                  placeholder="100$"
-                  name="price"
-                  className="price"
-                  value={formDescription.price}
-                  onChange={handleChangeDescription}
-                  required
-                />
-              </div>
+            <h3>What make your place attractive and exciting?</h3>
+            <div className="description">
+              <p>Title</p>
+              <input
+                type="text"
+                placeholder="Title"
+                name="title"
+                value={formDescription.title}
+                onChange={handleChangeDescription}
+                required
+              />
+              <p>Description</p>
+              <textarea
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formDescription.description}
+                onChange={handleChangeDescription}
+                required
+              />
+              <p>Highlight</p>
+              <input
+                type="text"
+                placeholder="Highlight"
+                name="highlight"
+                value={formDescription.highlight}
+                onChange={handleChangeDescription}
+                required
+              />
+              <p>Highlight details</p>
+              <textarea
+                type="text"
+                placeholder="Highlight details"
+                name="highlightDesc"
+                value={formDescription.highlightDesc}
+                onChange={handleChangeDescription}
+                required
+              />
+              <p>Now, set your PRICE</p>
+              <span>$</span>
+              <input
+                type="number"
+                placeholder="100$"
+                name="price"
+                className="price"
+                value={formDescription.price}
+                onChange={handleChangeDescription}
+                required
+              />
             </div>
           </div>
-          
-          <button className="submit_btn" type="submit">
-            CREATE YOUR LISTING
-          </button>
+
+          <div className="sub_btn">
+            <button className="submit_btn" type="submit">
+              CREATE YOUR LISTING
+            </button>
+          </div>
         </form>
       </div>
     </>
