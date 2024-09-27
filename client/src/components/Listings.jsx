@@ -38,18 +38,54 @@ const Listings = () => {
   console.log(listings);
 
   return (
-    <div className="category-list">
-      {categories?.map((category, index) => (
-        <div
-          className={`category`}
-          key={index}
-          onClick={() => selectedCategory(category.label)}
-        >
-          <div className="category_icon">{category.icon}</div>
-          <p>{category.label}</p>
+    <>
+      <div className="category-list">
+        {categories?.map((category, index) => (
+          <div
+            className={`category`}
+            key={index}
+            onClick={() => selectedCategory(category.label)}
+          >
+            <div className="category_icon">{category.icon}</div>
+            <p>{category.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="listings">
+          {listings.map(
+            ({
+              _id,
+              creator,
+              listingPhotoPaths,
+              city,
+              province,
+              country,
+              category,
+              type,
+              price,
+              booking = false,
+            }) => (
+              <ListingCard
+                listingId={_id}
+                creator={creator}
+                listingPhotoPaths={listingPhotoPaths}
+                city={city}
+                province={province}
+                country={country}
+                category={category}
+                type={type}
+                price={price}
+                booking={booking}
+              />
+            )
+          )}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
