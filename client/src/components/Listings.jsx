@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { categories } from "../data";
 import "../styles/Listings.scss";
 import ListingCard from "./ListingCard";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
+import { setListings } from "../redux/state";
 
 const Listings = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const Listings = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const Listings = useSelector((state) => state.listings);
+  const listings = useSelector((state) => state.listings);
 
   const getFeedListings = async () => {
     try {
@@ -19,10 +20,23 @@ const Listings = () => {
         selectedCategory !== "All"
           ? `http://localhost3001/properties?category=${selectedCategory}`
           : "http://localhost:3001/properties",
-        { method: "POST" }
+        { method: "GET" }
       );
-    } catch (error) {}
+
+      const data = await response.json();
+      dispatch(setListings({ listings: data }));
+      setLoading(false);
+    } catch (error) {
+      console.log("Fetch Listings Failed", error.message);
+    }
   };
+
+  useEffect(() => {
+    getFeedListings();
+  }, [selectedCategory]);
+
+  console.log(listings);
+
   return (
     <div className="category-list">
       {categories?.map((category, index) => (
