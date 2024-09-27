@@ -15,13 +15,22 @@ const Listings = () => {
 
   const getFeedListings = async () => {
     try {
-      const response = await fetch("http://localhost3001/properties");
+      const response = await fetch(
+        selectedCategory !== "All"
+          ? `http://localhost3001/properties?category=${selectedCategory}`
+          : "http://localhost:3001/properties",
+        { method: "POST" }
+      );
     } catch (error) {}
   };
   return (
     <div className="category-list">
       {categories?.map((category, index) => (
-        <div className={`category`} key={index}>
+        <div
+          className={`category`}
+          key={index}
+          onClick={() => selectedCategory(category.label)}
+        >
           <div className="category_icon">{category.icon}</div>
           <p>{category.label}</p>
         </div>
