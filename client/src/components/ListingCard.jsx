@@ -11,7 +11,7 @@ const ListingCard = ({
   province,
   country,
   category,
-  tye,
+  type,
   price,
   startDate,
   endDate,
@@ -65,6 +65,15 @@ const ListingCard = ({
           ))}
         </div>
       </div>
+
+      <h3>
+        {city},{province},{country}
+      </h3>
+      <p>{category}</p>
+      <p>{type}</p>
+      <p>
+        <span>${price}</span> per night
+      </p>
     </div>
   );
 };

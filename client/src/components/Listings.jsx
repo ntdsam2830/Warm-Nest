@@ -46,7 +46,7 @@ const Listings = () => {
               category.label === selectedCategory ? "selected" : ""
             }`}
             key={index}
-            onClick={() => selectedCategory(category.label)}
+            onClick={() => setSelectedCategory(category.label)}
           >
             <div className="category_icon">{category.icon}</div>
             <p>{category.label}</p>
