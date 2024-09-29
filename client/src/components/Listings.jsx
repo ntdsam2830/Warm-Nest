@@ -10,7 +10,7 @@ const Listings = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
 
@@ -42,7 +42,9 @@ const Listings = () => {
       <div className="category-list">
         {categories?.map((category, index) => (
           <div
-            className={`category`}
+            className={`category ${
+              category.label === selectedCategory ? "selected" : ""
+            }`}
             key={index}
             onClick={() => selectedCategory(category.label)}
           >
