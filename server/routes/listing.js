@@ -107,3 +107,12 @@ router.get("/", async (req, res) => {
 });
 
 module.exports = router;
+
+/* LISTING DETAILS */
+router.get("/:listingId", async (req, res) => {
+  try {
+    const { listingId } = req.params;
+    const listing = await Listing.findById(listingId);
+    res.status(202).json(listing);
+  } catch (error) {}
+});
