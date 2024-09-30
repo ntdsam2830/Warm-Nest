@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import "../styles/ListingDetails.scss";
@@ -50,6 +51,16 @@ const ListingDetails = () => {
         {listing.guestCount} guests - {listing.bedroomCount} bedroom(s) -{" "}
         {listing.bedCount} bed(s) - {listing.bathroomCount} bathroom(s)
       </p>
+      <hr />
+
+      <div className="profile">
+        <img
+          src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
+            "public",
+            ""
+          )}`}
+        />{" "}
+      </div>
     </div>
   );
 };
