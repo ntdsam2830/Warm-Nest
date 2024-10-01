@@ -61,6 +61,22 @@ const ListingDetails = () => {
           )}`}
         />{" "}
       </div>
+      <hr />
+
+      <h3>Description</h3>
+      <p>{listing.description}</p>
+      <hr />
+
+      <h3>{listing.highlight}</h3>
+      <p>{listing.highlightDesc}</p>
+      <hr />
+
+      <div className="booking">
+        <div>
+          <h2>What this place offers?</h2>
+          <div className="amenities"></div>
+        </div>
+      </div>
     </div>
   );
 };
