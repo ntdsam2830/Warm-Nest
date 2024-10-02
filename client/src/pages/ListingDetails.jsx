@@ -4,6 +4,7 @@ import React from "react";
 import "../styles/ListingDetails.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { facilities } from "../data";
 
 const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
@@ -74,7 +75,22 @@ const ListingDetails = () => {
       <div className="booking">
         <div>
           <h2>What this place offers?</h2>
-          <div className="amenities"></div>
+          <div className="amenities">
+            {JSON.parse(listing.amenities).map((item, index) => {
+              <div className="facility" key={index}>
+                <div className="facility_icon">
+                  {" "}
+                  {facilities.find((facility) => facility.name === item)?.icon}
+                </div>
+                <p>item</p>
+              </div>;
+            })}
+          </div>
+        </div>
+
+        <div>
+          <h2>How long do you want to stay?</h2>
+          <div className="date-range-calendar"></div>
         </div>
       </div>
     </div>
