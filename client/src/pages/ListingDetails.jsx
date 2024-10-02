@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { facilities } from "../data";
 
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 
 const ListingDetails = () => {
