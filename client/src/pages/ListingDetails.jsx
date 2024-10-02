@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { facilities } from "../data";
 
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
 const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
 
@@ -90,7 +93,9 @@ const ListingDetails = () => {
 
         <div>
           <h2>How long do you want to stay?</h2>
-          <div className="date-range-calendar"></div>
+          <div className="date-range-calendar">
+            <DateRange />
+          </div>
         </div>
       </div>
     </div>
