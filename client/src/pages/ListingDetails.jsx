@@ -8,6 +8,7 @@ import { facilities } from "../data";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
 
 const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
