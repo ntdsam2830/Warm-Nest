@@ -19,20 +19,43 @@ const ListingDetails = () => {
   const getListingDetails = async () => {
     try {
       const response = await fetch(
-        `http:localhost:3001/properties/${listingId}`,
-        { method: "GET" }
+        `http://localhost:3001/properties/${listingId}`,
+        {
+          method: "GET",
+        }
       );
 
       const data = await response.json();
       setListing(data);
-    } catch (error) {
-      console.log("Fetch Listing Details Failed", error.message);
+      setLoading(false);
+    } catch (err) {
+      console.log("Fetch Listing Details Failed", err.message);
     }
   };
 
   useEffect(() => {
     getListingDetails();
   }, []);
+
+  console.log(listing);
+
+  /* BOOKING CALENDAR */
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const handleSelect = (ranges) => {
+    // Update the selected date range when user makes a selection
+    setDateRange([ranges.selection]);
+  };
+
+  const start = new Date(dateRange[0].startDate);
+  const end = new Date(dateRange[0].endDate);
+  const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24); // Calculate the difference in day unit
 
   return (
     <div className="listing-details">
@@ -95,7 +118,19 @@ const ListingDetails = () => {
         <div>
           <h2>How long do you want to stay?</h2>
           <div className="date-range-calendar">
-            <DateRange />
+            <DateRange ranges={dateRange} onChange={handleSelect} />
+            {dayCount > 1 ? (
+              <h2>
+                ${listing.price} x {dayCount} nights
+              </h2>
+            ) : (
+              <h2>
+                ${listing.price} x {dayCount} night
+              </h2>
+            )}
+            <h2>Total price: ${listing.price * dayCount}</h2>
+            <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
+            <p>End Date: {dateRange[0].endDate.toDateString()}</p>{" "}
           </div>
         </div>
       </div>
