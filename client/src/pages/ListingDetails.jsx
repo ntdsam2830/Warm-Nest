@@ -57,16 +57,18 @@ const ListingDetails = () => {
   const end = new Date(dateRange[0].endDate);
   const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24); // Calculate the difference in day unit
 
+  const handleSubmit = () => {};
   return (
     <div className="listing-details">
       <div className="title">
         <h1>{listing.title}</h1>
+        <div></div>
       </div>
 
       <div className="photos">
         {listing.listingPhotoPaths?.map((item) => {
           <img
-            src={`http:localhost:3001/${item.replace("public", "")}`}
+            src={`http://localhost:3001/${item.replace("public", "")}`}
             alt="listing photo"
           />;
         })}
@@ -131,6 +133,9 @@ const ListingDetails = () => {
             <h2>Total price: ${listing.price * dayCount}</h2>
             <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
             <p>End Date: {dateRange[0].endDate.toDateString()}</p>{" "}
+            <button className="button" type="submit" onClick={handleSubmit}>
+              BOOKING
+            </button>
           </div>
         </div>
       </div>
