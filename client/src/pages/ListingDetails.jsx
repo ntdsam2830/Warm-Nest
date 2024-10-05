@@ -14,10 +14,11 @@ const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
 
   const { listingId } = useParams();
-  const [listing, setListing] = useState(null);
+  const [listing, setListing] = useState(null); // Attention
 
   const getListingDetails = async () => {
     try {
+      console.log("111111111111");
       const response = await fetch(
         `http://localhost:3001/properties/${listingId}`,
         {
@@ -61,12 +62,12 @@ const ListingDetails = () => {
   return (
     <div className="listing-details">
       <div className="title">
-        <h1>{listing.title}</h1>
+        <h1>{listing?.title}</h1>
         <div></div>
       </div>
 
       <div className="photos">
-        {listing.listingPhotoPaths?.map((item) => {
+        {listing?.listingPhotoPaths?.map((item) => {
           <img
             src={`http://localhost:3001/${item.replace("public", "")}`}
             alt="listing photo"
@@ -75,17 +76,18 @@ const ListingDetails = () => {
       </div>
 
       <h2>
-        {listing.type} in {listing.city}, {listing.province}, {listing.country}
+        {listing?.type} in {listing?.city}, {listing?.province},{" "}
+        {listing?.country}
       </h2>
       <p>
-        {listing.guestCount} guests - {listing.bedroomCount} bedroom(s) -{" "}
-        {listing.bedCount} bed(s) - {listing.bathroomCount} bathroom(s)
+        {listing?.guestCount} guests - {listing?.bedroomCount} bedroom(s) -{" "}
+        {listing?.bedCount} bed(s) - {listing?.bathroomCount} bathroom(s)
       </p>
       <hr />
 
       <div className="profile">
         <img
-          src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
+          src={`http://localhost:3001/${listing?.creator?.profileImagePath?.replace(
             "public",
             ""
           )}`}
@@ -94,18 +96,18 @@ const ListingDetails = () => {
       <hr />
 
       <h3>Description</h3>
-      <p>{listing.description}</p>
+      <p>{listing?.description}</p>
       <hr />
 
-      <h3>{listing.highlight}</h3>
-      <p>{listing.highlightDesc}</p>
+      <h3>{listing?.highlight}</h3>
+      <p>{listing?.highlightDesc}</p>
       <hr />
 
       <div className="booking">
         <div>
           <h2>What this place offers?</h2>
           <div className="amenities">
-            {JSON.parse(listing.amenities).map((item, index) => {
+            {listing?.amenities?.map((item, index) => {
               <div className="facility" key={index}>
                 <div className="facility_icon">
                   {" "}
@@ -123,14 +125,14 @@ const ListingDetails = () => {
             <DateRange ranges={dateRange} onChange={handleSelect} />
             {dayCount > 1 ? (
               <h2>
-                ${listing.price} x {dayCount} nights
+                ${listing?.price} x {dayCount} nights
               </h2>
             ) : (
               <h2>
-                ${listing.price} x {dayCount} night
+                ${listing?.price} x {dayCount} night
               </h2>
             )}
-            <h2>Total price: ${listing.price * dayCount}</h2>
+            <h2>Total price: ${listing?.price * dayCount}</h2>
             <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
             <p>End Date: {dateRange[0].endDate.toDateString()}</p>{" "}
             <button className="button" type="submit" onClick={handleSubmit}>
