@@ -73,13 +73,15 @@ const ListingDetails = () => {
           <div></div>
         </div>
 
-        <div className="photos">
-          {listing.listingPhotoPaths?.map((item) => (
-            <img
-              src={`http://localhost:3001/${item.replace("public", "")}`}
-              alt="listing photo"
-            />
-          ))}
+        <div className="scrollbar">
+          <div className="photos">
+            {listing.listingPhotoPaths?.map((item) => (
+              <img
+                src={`http://localhost:3001/${item.replace("public", "")}`}
+                alt="listing photo"
+              />
+            ))}
+          </div>
         </div>
 
         <h2>
