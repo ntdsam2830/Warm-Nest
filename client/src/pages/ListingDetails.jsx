@@ -21,7 +21,6 @@ const ListingDetails = () => {
 
   const getListingDetails = async () => {
     try {
-      console.log("111111111111");
       const response = await fetch(
         `http://localhost:3001/properties/${listingId}`,
         {
