@@ -74,13 +74,12 @@ const ListingDetails = () => {
         </div>
 
         <div className="photos">
-          {listing?.listingPhotoPaths.map((item, index) => {
+          {listing.listingPhotoPaths?.map((item) => (
             <img
-              src={`http://localhost:3001/${item?.replace("public", "")}`}
+              src={`http://localhost:3001/${item.replace("public", "")}`}
               alt="listing photo"
-              key={index}
-            />;
-          })}
+            />
+          ))}
         </div>
 
         <h2>
@@ -119,7 +118,7 @@ const ListingDetails = () => {
           <div>
             <h2>What this place offers?</h2>
             <div className="amenities">
-              {listing?.amenities[0]?.split(",").map((item, index) => {
+              {listing.amenities[0].split(",").map((item, index) => (
                 <div className="facility" key={index}>
                   <div className="facility_icon">
                     {
@@ -128,8 +127,8 @@ const ListingDetails = () => {
                     }
                   </div>
                   <p>{item}</p>
-                </div>;
-              })}
+                </div>
+              ))}
             </div>
           </div>
 
