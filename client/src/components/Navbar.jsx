@@ -72,6 +72,7 @@ const Navbar = () => {
             <Link to="/">
               {user.firstName} {user.lastName}
             </Link>
+            <hr></hr>
             <Link to="/">Trip List</Link>
             <Link to="/">Wish List</Link>
             <Link to="/">Property List</Link>
