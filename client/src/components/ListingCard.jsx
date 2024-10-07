@@ -67,7 +67,7 @@ const ListingCard = ({
       </div>
 
       <h3>
-        {city},{province},{country}
+        {city}, {province}, {country}
       </h3>
       <p>{category}</p>
       <p>{type}</p>
