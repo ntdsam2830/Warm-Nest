@@ -3,9 +3,10 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import "../styles/ListingDetails.scss";
-import { useState, useEffect, useSelector } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { facilities } from "../data";
+import { useSelector } from "react-redux";
 
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file

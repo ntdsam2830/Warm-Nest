@@ -69,6 +69,9 @@ const Navbar = () => {
 
         {dropdownMenu && user && (
           <div className="navbar_right_accountmenu">
+            <Link to="/">
+              {user.firstName} {user.lastName}
+            </Link>
             <Link to="/">Trip List</Link>
             <Link to="/">Wish List</Link>
             <Link to="/">Property List</Link>
