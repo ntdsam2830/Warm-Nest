@@ -17,6 +17,7 @@ const Listings = () => {
 
   const getFeedListings = async () => {
     try {
+      console.log(22222);
       const response = await fetch(
         selectedCategory !== "All"
           ? `http://localhost:3001/properties?category=${selectedCategory}`
