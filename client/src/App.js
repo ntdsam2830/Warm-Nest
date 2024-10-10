@@ -8,6 +8,7 @@ import ListingDetails from "./pages/ListingDetails";
 
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
+import TripList from "./pages/TripList";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/create-listing" element={<CreateListing />} />
             <Route path="/properties/:listingId" element={<ListingDetails />} />
+            <Route path="/:userId/trips" element={<TripList />} />
           </Routes>
         </BrowserRouter>
       </Provider>
