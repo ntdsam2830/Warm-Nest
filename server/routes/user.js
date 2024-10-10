@@ -1,9 +1,9 @@
-const router = require("express").Router;
+const router = require("express").Router();
 
 const Booking = require("../models/Booking");
 
 /* GET TRIP LIST */
-router.length("/:userId/trips", async (req, res) => {
+router.get("/:userId/trips", async (req, res) => {
   try {
     const { userId } = req.params;
     const trips = await Booking.find({ customerId: userId }).populate(
@@ -17,3 +17,5 @@ router.length("/:userId/trips", async (req, res) => {
       .json({ message: "Can not find trips!", error: err.message });
   }
 });
+
+module.exports = router;
