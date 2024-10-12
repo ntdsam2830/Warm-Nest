@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTripList } from "../redux/state";
 import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
+import ListingCard from "../components/ListingCard";
 
 const TripList = () => {
   const [loading, setLoading] = useState(true);
@@ -33,14 +34,23 @@ const TripList = () => {
   useEffect(() => {
     getTripList();
   }, []);
-  
+
   return loading ? (
     <Loader />
   ) : (
     <>
       <Navbar />
       <h1 className="title-list">Your Trip List</h1>
-      <div className="list"></div>
+      <div className="list">
+        {tripList?.map(({ listingId, startDate, endDate, totalPrice }) => (
+          <ListingCard
+            listingId={listingId}
+            startDate={startDate}
+            endDate={endDate}
+            totalPrice={totalPrice}
+          />
+        ))}
+      </div>
     </>
   );
 };
