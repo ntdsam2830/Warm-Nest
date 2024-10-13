@@ -42,14 +42,22 @@ const TripList = () => {
       <Navbar />
       <h1 className="title-list">Your Trip List</h1>
       <div className="list">
-        {tripList?.map(({ listingId, startDate, endDate, totalPrice }) => (
-          <ListingCard
-            listingId={listingId}
-            startDate={startDate}
-            endDate={endDate}
-            totalPrice={totalPrice}
-          />
-        ))}
+        {tripList?.map(
+          ({ listingId, startDate, endDate, totalPrice, booking = true }) => (
+            <ListingCard
+              listingId={listingId}
+              listingPhotoPaths={listingId.listingPhotoPaths}
+              city={listingId.city}
+              province={listingId.province}
+              country={listingId.country}
+              category={listingId.category}
+              startDate={startDate}
+              endDate={endDate}
+              totalPrice={totalPrice}
+              booking={booking}
+            />
+          )
+        )}
       </div>
     </>
   );
