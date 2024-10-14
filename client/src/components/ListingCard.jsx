@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
 import "../styles/ListingCard.scss";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 
 const ListingCard = ({
@@ -32,8 +34,16 @@ const ListingCard = ({
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length);
   };
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
-    <div className="listing-card">
+    <div
+      className="listing-card"
+      onClick={() => {
+        navigate(`/properties/${listingId}`);
+      }}
+    >
       <div className="slider-container">
         <div
           className="slider"
@@ -48,6 +58,7 @@ const ListingCard = ({
               <div
                 className="prev-button"
                 onClick={(e) => {
+                  e.stopPropagation();
                   goToPrevSlide(e);
                 }}
               >
@@ -56,6 +67,7 @@ const ListingCard = ({
               <div
                 className="next-button"
                 onClick={(e) => {
+                  e.stopPropagation();
                   goToNextSlide(e);
                 }}
               >

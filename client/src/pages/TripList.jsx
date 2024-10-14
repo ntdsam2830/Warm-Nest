@@ -45,7 +45,7 @@ const TripList = () => {
         {tripList?.map(
           ({ listingId, startDate, endDate, totalPrice, booking = true }) => (
             <ListingCard
-              listingId={listingId}
+              listingId={listingId._id}
               listingPhotoPaths={listingId.listingPhotoPaths}
               city={listingId.city}
               province={listingId.province}
