@@ -37,6 +37,26 @@ const ListingCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  /* ADD TO WISHLIST */
+  const user = useSelector((state) => state.user);
+  const wishList = useSelector((state) => state.user.wishList);
+
+  const isLiked = wishList.find((item) => item._id === listingId);
+
+  const patchWishList = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${user._id}/${listingId}`,
+      {
+        method: "PATCH",
+        header: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    
+  };
+
   return (
     <div
       className="listing-card"
