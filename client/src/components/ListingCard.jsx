@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import "../styles/ListingCard.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { setWishList } from "../redux/state";
+
+import {
+  ArrowBackIosNew,
+  ArrowForwardIos,
+  Favorite,
+} from "@mui/icons-material";
 
 const ListingCard = ({
   listingId,
@@ -39,22 +45,26 @@ const ListingCard = ({
 
   /* ADD TO WISHLIST */
   const user = useSelector((state) => state.user);
-  const wishList = useSelector((state) => state.user.wishList);
+  const wishList = user?.wishList || [];
 
-  const isLiked = wishList.find((item) => item._id === listingId);
+  const isLiked = wishList?.find((item) => item?._id === listingId);
 
   const patchWishList = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${user._id}/${listingId}`,
-      {
-        method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    
+    if (user?._id !== creator._id) {
+      const response = await fetch(
+        `http://localhost:3001/users/${user?._id}/${listingId}`,
+        {
+          method: "PATCH",
+          header: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      dispatch(setWishList(data.wishList));
+    } else {
+      return;
+    }
   };
 
   return (
@@ -120,6 +130,21 @@ const ListingCard = ({
           </p>
         </>
       )}
+
+      <button
+        className="favorite"
+        onClick={(e) => {
+          e.stopPropagation();
+          patchWishList();
+        }}
+        disabled={!user}
+      >
+        {isLiked ? (
+          <Favorite sx={{ color: "red" }} />
+        ) : (
+          <Favorite sx={{ color: "white" }} />
+        )}
+      </button>
     </div>
   );
 };
