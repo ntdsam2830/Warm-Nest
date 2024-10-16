@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "../styles/List.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +7,7 @@ import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
 import { setPropertyList } from "../redux/state";
 import Loader from "../components/Loader";
+import Footer from "../components/Footer";
 
 const PropertyList = () => {
   const [loading, setLoading] = useState(true);
@@ -70,6 +72,8 @@ const PropertyList = () => {
           )
         )}
       </div>
+
+      <Footer />
     </>
   );
 };
