@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import TripList from "./pages/TripList";
 import WishList from "./pages/WishList";
+import PropertyList from "./pages/PropertyList";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/properties/:listingId" element={<ListingDetails />} />
             <Route path="/:userId/trips" element={<TripList />} />
             <Route path="/:userId/wishList" element={<WishList />} />
+            <Route path="/:userId/propertiesList" element={<PropertyList />} />
           </Routes>
         </BrowserRouter>
       </Provider>
