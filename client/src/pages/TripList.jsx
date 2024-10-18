@@ -44,9 +44,17 @@ const TripList = () => {
       <h1 className="title-list">Your Trip List</h1>
       <div className="list">
         {tripList?.map(
-          ({ listingId, startDate, endDate, totalPrice, booking = true }) => (
+          ({
+            listingId,
+            hostId,
+            startDate,
+            endDate,
+            totalPrice,
+            booking = true,
+          }) => (
             <ListingCard
               listingId={listingId._id}
+              creator={hostId._id}
               listingPhotoPaths={listingId.listingPhotoPaths}
               city={listingId.city}
               province={listingId.province}
