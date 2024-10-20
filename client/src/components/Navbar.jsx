@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const [search, setsearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const [dropdownMenu, setDropdownMenu] = useState("");
 
@@ -24,9 +24,19 @@ const Navbar = () => {
         <img src="/assets/logo.png" alt="logo" />
       </a>
       <div className="navbar_search">
-        <input type="text" placeholder="Search..." />
-        <IconButton>
-          <Search sx={{ color: variables.pinkred }} />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <IconButton disabled={search === ""}>
+          <Search
+            sx={{ color: variables.pinkred }}
+            onClick={() => {
+              navigate(`/properties/search/${search}`);
+            }}
+          />
         </IconButton>
       </div>
       <div className="navbar_right">
