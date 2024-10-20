@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import "../styles/List.scss";
 import Navbar from "../components/Navbar";
