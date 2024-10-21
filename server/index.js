@@ -13,6 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+// CORS setup
+app.use(
+  cors({
+    origin: "https://warm-nest.vercel.app", // Replace with your actual frontend URL
+  })
+);
+
 /*ROUTES*/
 app.use("/auth", authRoutes);
 app.use("/properties", listingRoutes);
