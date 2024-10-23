@@ -39,9 +39,10 @@ mongoose
   })
   .catch((err) => console.log(`${err} did not connect`));
 
+  console.log(typeof process.env.MONGO_URL);
 /*DEPLOYMENT ACCESS*/
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

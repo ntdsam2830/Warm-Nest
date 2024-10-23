@@ -83,29 +83,6 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
   }
 });
 
-/* GET LISTINGS */
-router.get("/", async (req, res) => {
-  const qCategory = req.query.category;
-
-  try {
-    let listings;
-    if (qCategory) {
-      listings = await Listing.find({ category: qCategory }).populate(
-        "creator"
-      );
-    } else {
-      listings = await Listing.find().populate("creator");
-    }
-
-    res.status(200).json(listings);
-  } catch (error) {
-    res
-      .status(404)
-      .json({ message: "Fail to fetch listings", error: error.message });
-    console.log(error);
-  }
-});
-
 /* GET LISTINGS BY SEARCH */
 router.get("/search/:search", async (req, res) => {
   const { search } = req.params;
@@ -133,8 +110,6 @@ router.get("/search/:search", async (req, res) => {
   }
 });
 
-
-
 /* LISTING DETAILS */
 router.get("/:listingId", async (req, res) => {
   try {
@@ -145,6 +120,29 @@ router.get("/:listingId", async (req, res) => {
     res
       .status(404)
       .json({ message: "Listing can not be found!", error: error.message });
+  }
+});
+
+/* GET LISTINGS */
+router.get("/", async (req, res) => {
+  const qCategory = req.query.category;
+
+  try {
+    let listings;
+    if (qCategory) {
+      listings = await Listing.find({ category: qCategory }).populate(
+        "creator"
+      );
+    } else {
+      listings = await Listing.find().populate("creator");
+    }
+
+    res.status(200).json(listings);
+  } catch (error) {
+    res
+      .status(404)
+      .json({ message: "Fail to fetch listings", error: error.message });
+    console.log(error);
   }
 });
 
