@@ -29,21 +29,24 @@ app.use("/users", userRoutes);
 /*MONGOOSE SETUP*/
 const PORT = 3001;
 mongoose
-  .connect(process.env.MONGO_URL, {
-    dbName: "Warm_Nest",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://User01:12348765@atlascluster.hnyni.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster",
+    {
+      dbName: "Warm_Nest",
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
   })
   .catch((err) => console.log(`${err} did not connect`));
 
 /*DEPLOYMENT ACCESS*/
-mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect(process.env.MONGO_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch((err) => console.log(err));
